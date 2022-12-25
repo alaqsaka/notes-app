@@ -70,7 +70,9 @@ export default class Archived extends Component {
             onArchive={this.onArchiveNoteHandler}
           />
         ) : (
-          <p className="notes-list__empty-message">Catatan tidak tersedia</p>
+          <p className="notes-list__empty-message">
+            Catatan Arsip tidak tersedia
+          </p>
         )}
       </div>
     );

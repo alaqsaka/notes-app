@@ -1,17 +1,9 @@
 import React from "react";
-import Button from "./Button";
 import { showFormattedDate } from "../utils";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const NoteItem = ({
-  id,
-  title,
-  body,
-  createdAt,
-  archived,
-  onDelete,
-  onArchive,
-}) => {
+const NoteItem = ({ id, title, body, createdAt }) => {
   return (
     <div className="note-item">
       <div className="note-item__content">
@@ -25,6 +17,13 @@ const NoteItem = ({
       </div>
     </div>
   );
+};
+
+NoteItem.propTypes = {
+  id: PropTypes.any.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default NoteItem;
