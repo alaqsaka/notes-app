@@ -10,6 +10,7 @@ import Archived from "./pages/Archived";
 import CatatanForm from "./pages/CatatanForm";
 import DetailPage from "./pages/DetailPage";
 import Homepage from "./pages/Homepage";
+import Page404 from "./pages/Page404";
 
 function NoteApp() {
   return (
@@ -22,6 +23,7 @@ function NoteApp() {
             <Route path="/notes/:id" element={<DetailPage />} />
             <Route path="/archived" element={<Archived />} />
             <Route path="/tambah-catatan" element={<CatatanForm />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </main>
       </div>
