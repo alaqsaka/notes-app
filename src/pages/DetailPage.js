@@ -13,7 +13,18 @@ function DetailPageWrapper() {
     navigate("/");
   }
 
-  return <DetailPage id={id} deleteNote={onDeleteNoteHandler} />;
+  function onArchiveNoteHandler(id) {
+    archiveNote(id);
+    navigate("/");
+  }
+
+  return (
+    <DetailPage
+      id={id}
+      deleteNote={onDeleteNoteHandler}
+      archiveNote={onArchiveNoteHandler}
+    />
+  );
 }
 
 class DetailPage extends React.Component {
@@ -25,10 +36,15 @@ class DetailPage extends React.Component {
     };
 
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.onArchiveHandler = this.onArchiveHandler.bind(this);
   }
 
   onDeleteHandler(id) {
     this.props.deleteNote(id);
+  }
+
+  onArchiveHandler(id) {
+    this.props.archiveNote(id);
   }
 
   render() {
@@ -51,7 +67,7 @@ class DetailPage extends React.Component {
           <div className="action" onClick={() => this.onDeleteHandler(id)}>
             <RiDeleteBin2Line />
           </div>
-          <div className="action">
+          <div className="action" onClick={() => this.onArchiveHandler(id)}>
             <RiInboxArchiveFill />
           </div>
         </div>
