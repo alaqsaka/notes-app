@@ -2,9 +2,25 @@ import React, { Component } from "react";
 import { addNote } from "../utils/local-data";
 import Button from "./Button";
 import TextArea from "./TextArea";
+import { useNavigate } from "react-router-dom";
 import TextField from "./TextField";
 
-export default class NoteInput extends Component {
+const NoteInputWrapper = () => {
+  const navigate = useNavigate();
+
+  function onAddNoteHandler({ title, body }) {
+    addNote({ title, body });
+    navigate("/");
+  }
+
+  return (
+    <div>
+      <NoteInput addNote={onAddNoteHandler} />
+    </div>
+  );
+};
+
+class NoteInput extends Component {
   constructor(props) {
     super(props);
 
@@ -49,8 +65,8 @@ export default class NoteInput extends Component {
 
     const title = this.state.title;
     const body = this.state.body;
-    addNote({ title, body });
-    this.props.addNote(this.state);
+    // addNote({ title, body });
+    this.props.addNote({ title, body });
   }
 
   render() {
@@ -82,3 +98,5 @@ export default class NoteInput extends Component {
     );
   }
 }
+
+export default NoteInputWrapper;

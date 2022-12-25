@@ -48,6 +48,7 @@ function getAllNotes() {
 }
 
 function getNote(id) {
+  console.log(id);
   const foundedNote = notes.find((note) => note.id === id);
   return foundedNote;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import NoteInput from "../components/NoteInput";
+import { Link } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 import NoteList from "../components/NoteList";
 
 import { getAllNotes } from "../utils/local-data";
@@ -62,7 +63,17 @@ export default class HomePage extends Component {
   render() {
     return (
       <div className="note-app__body">
-        <NoteInput addNote={this.onAddNoteHandler} />
+        <Link
+          className="btn-link button__base"
+          to={"/tambah-catatan"}
+          style={{
+            width: "200px",
+            textDecoration: "none",
+            marginBottom: "20px",
+          }}
+        >
+          <AiOutlinePlus /> Tambah Catatan
+        </Link>
         <h2>Catatan Aktif</h2>
         {this.state.notes.filter((note) => note.archived === false).length >
         0 ? (

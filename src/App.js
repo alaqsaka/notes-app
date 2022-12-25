@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 
 import NoteAppHeader from "./components/NoteAppHeader";
 import Archived from "./pages/Archived";
+import CatatanForm from "./pages/CatatanForm";
 import DetailPage from "./pages/DetailPage";
 import Homepage from "./pages/Homepage";
 
@@ -20,6 +21,7 @@ function NoteApp() {
             <Route path="/" element={<Homepage />} />
             <Route path="/notes/:id" element={<DetailPage />} />
             <Route path="/archived" element={<Archived />} />
+            <Route path="/tambah-catatan" element={<CatatanForm />} />
           </Routes>
         </main>
       </div>
