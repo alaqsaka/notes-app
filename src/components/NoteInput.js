@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { addNote } from "../utils/local-data";
 import Button from "./Button";
 import TextArea from "./TextArea";
 import TextField from "./TextField";
@@ -45,6 +46,10 @@ export default class NoteInput extends Component {
         body: "",
       };
     });
+
+    const title = this.state.title;
+    const body = this.state.body;
+    addNote({ title, body });
     this.props.addNote(this.state);
   }
 
