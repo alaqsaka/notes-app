@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 // import TextField from "./TextField";
 
 export default class NoteAppHeader extends Component {
@@ -6,13 +7,19 @@ export default class NoteAppHeader extends Component {
     return (
       <>
         <div className="note-app__header">
-          <h1>Catatan Saya</h1>
-          {/* <TextField
-            type="text"
-            onChange={this.props.onSearch}
-            value={this.props.search}
-            placeholder="Cari catatan ..."
-          /> */}
+          <h1>
+            {" "}
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              Catatan Saya{" "}
+            </Link>
+          </h1>
+
+          <Link
+            to="/archived"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Arsip
+          </Link>
         </div>
       </>
     );
