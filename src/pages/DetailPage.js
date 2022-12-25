@@ -1,11 +1,19 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { showFormattedDate } from "../utils";
-import { getNote } from "../utils/local-data";
+import { RiDeleteBin2Line, RiInboxArchiveFill } from "react-icons/ri";
+import { getNote, deleteNote, archiveNote } from "../utils/local-data";
 
 function DetailPageWrapper() {
   const { id } = useParams();
-  return <DetailPage id={id} />;
+  const navigate = useNavigate();
+
+  function onDeleteNoteHandler(id) {
+    deleteNote(id);
+    navigate("/");
+  }
+
+  return <DetailPage id={id} deleteNote={onDeleteNoteHandler} />;
 }
 
 class DetailPage extends React.Component {
@@ -15,23 +23,38 @@ class DetailPage extends React.Component {
     this.state = {
       note: getNote(props.id),
     };
+
+    this.onDeleteHandler = this.onDeleteHandler.bind(this);
+  }
+
+  onDeleteHandler(id) {
+    this.props.deleteNote(id);
   }
 
   render() {
     if (this.state.movie === null) {
       return (
-        <div className="note-app__body">
+        <div className="detail-page">
           <p>Catatan tidak ditemukan.</p>
         </div>
       );
     }
-    console.log(this.state.note);
-    const { title, createdAt, body } = this.state.note;
+
+    const { title, createdAt, body, id } = this.state.note;
     return (
-      <div className="note-app__body">
-        <h1 className="note-detail__title">{title}</h1>
-        <p className="note-detail__date">{showFormattedDate(createdAt)}</p>
-        <p className="note-detail__body">{body}</p>
+      <div className="detail-page">
+        <h1 className="detail-page__title">{title}</h1>
+        <p className="detail-page__createdAt">{showFormattedDate(createdAt)}</p>
+        <p className="detail-page__body">{body}</p>
+
+        <div className="detail-page__action">
+          <div className="action" onClick={() => this.onDeleteHandler(id)}>
+            <RiDeleteBin2Line />
+          </div>
+          <div className="action">
+            <RiInboxArchiveFill />
+          </div>
+        </div>
       </div>
     );
   }
