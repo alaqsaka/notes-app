@@ -1,23 +1,37 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import NoteList from "../components/NoteList";
 
-import { getAllNotes } from "../utils/local-data";
+import { getActiveNotes } from "../utils/local-data";
+import SearchBar from "../components/SearchBar";
 
-export default class HomePage extends Component {
+function HomePageWrapper() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const keyword = searchParams.get("keyword");
+
+  function changeSearchParams(keyword) {
+    setSearchParams({ keyword });
+  }
+
+  return (
+    <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  );
+}
+
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: getAllNotes(),
-      archivedNotes: [],
-      search: "",
-      filteredNotes: [],
+      notes: getActiveNotes(),
+      keyword: props.defaultKeyword || "",
     };
 
     this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this);
     this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this);
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
+    this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
   }
 
   onDeleteNoteHandler(id) {
@@ -60,7 +74,25 @@ export default class HomePage extends Component {
     });
   }
 
+  onKeywordChangeHandler(keyword) {
+    this.setState(() => {
+      return {
+        keyword,
+      };
+    });
+
+    this.props.keywordChange(keyword);
+  }
+
   render() {
+    const notes = this.state.notes.filter((note) => {
+      return note.title
+        .toLowerCase()
+        .includes(this.state.keyword.toLowerCase());
+    });
+
+    console.log(notes);
+
     return (
       <div className="note-app__body">
         <Link
@@ -75,14 +107,13 @@ export default class HomePage extends Component {
           <AiOutlinePlus /> Tambah Catatan
         </Link>
         <h2>Catatan Aktif</h2>
-        {this.state.notes.filter((note) => note.archived === false).length >
-        0 ? (
+        <SearchBar
+          keyword={this.state.keyword}
+          keywordChange={this.onKeywordChangeHandler}
+        />
+        {notes.length > 0 ? (
           <NoteList
-            notes={
-              this.state.search.length > 0
-                ? this.state.filteredNotes
-                : this.state.notes.filter((note) => note.archived === false)
-            }
+            notes={notes}
             onDelete={this.onDeleteNoteHandler}
             onArchive={this.onArchiveNoteHandler}
           />
@@ -93,3 +124,5 @@ export default class HomePage extends Component {
     );
   }
 }
+
+export default HomePageWrapper;
