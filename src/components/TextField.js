@@ -14,8 +14,8 @@ const TextField = ({ type, placeholder, value, onChange, required }) => {
 };
 
 TextField.propTypes = {
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   required: PropTypes.bool.isRequired,
 };

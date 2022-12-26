@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { addNote } from "../utils/local-data";
 import Button from "./Button";
 import TextArea from "./TextArea";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import TextField from "./TextField";
 
@@ -98,5 +99,9 @@ class NoteInput extends Component {
     );
   }
 }
+
+NoteInput.propTypes = {
+  addNote: PropTypes.func.isRequired,
+};
 
 export default NoteInputWrapper;

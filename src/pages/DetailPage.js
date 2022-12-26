@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { showFormattedDate } from "../utils";
+import PropTypes from "prop-types";
 import { RiDeleteBin2Line, RiInboxArchiveFill } from "react-icons/ri";
 import { getNote, deleteNote, archiveNote } from "../utils/local-data";
 
@@ -75,5 +76,14 @@ class DetailPage extends React.Component {
     );
   }
 }
+
+DetailPage.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired,
+  ]),
+  deleteNote: PropTypes.func.isRequired,
+  archiveNote: PropTypes.func.isRequired,
+};
 
 export default DetailPageWrapper;

@@ -28,6 +28,10 @@ Button.propTypes = {
   color: PropTypes.string,
   onClick: PropTypes.func,
   type: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default Button;

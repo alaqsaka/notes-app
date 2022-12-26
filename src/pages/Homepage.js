@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import NoteList from "../components/NoteList";
-
+import PropTypes from "prop-types";
 import { getActiveNotes } from "../utils/local-data";
 import SearchBar from "../components/SearchBar";
 
@@ -124,5 +124,10 @@ class HomePage extends Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  defaultKeyword: PropTypes.string,
+  keywordChange: PropTypes.func.isRequired,
+};
 
 export default HomePageWrapper;

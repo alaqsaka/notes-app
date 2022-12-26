@@ -20,6 +20,8 @@ function NoteList({ notes, onDelete, onArchive }) {
 
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.object),
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
 };
 
 export default NoteList;
