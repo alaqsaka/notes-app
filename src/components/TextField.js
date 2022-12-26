@@ -18,6 +18,7 @@ TextField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   required: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default TextField;
